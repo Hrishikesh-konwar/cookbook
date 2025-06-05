@@ -9,30 +9,34 @@ export const POST = async (request: Request) => {
     const { dish, region = "Indian" } = body;
 
     const prompt = `
-        Provide a detailed recipe for the Indian regional dish "${dish}" from ${region} cuisine.
+        
+Provide a detailed recipe for the Indian regional dish "${dish}" from ${region} cuisine.
 
-        Return the response as COMPLETE valid JSON. Do NOT cut off in the middle. Include:
-        - A short introduction
-        - List of ingredients with quantity
-        - Step-by-step instructions
+Return the response as COMPLETE valid JSON. Do NOT cut off in the middle. Include:
+- A short introduction
+- List of ingredients with quantity
+- Step-by-step instructions
+- A publicly accessible image URL of the finished dish
 
-        Ensure ingredients are locally available. Instructions should be beginner-friendly.
+Ensure ingredients are locally available. Instructions should be beginner-friendly.
 
-        Wrap the response in JSON format as:
-        {
-          "name": "Dish Name",
-          "introduction": "...",
-          "ingredients": [ { "item": "...", "quantity": "..." } ],
-          "steps": [ "Step 1", "Step 2", ... ]
-        }
-        Respond only with valid JSON. Ensure the response is not cut off.
+Wrap the response in JSON format as:
+{
+  "name": "Dish Name",
+  "introduction": "...",
+  "ingredients": [ { "item": "...", "quantity": "..." } ],
+  "steps": [ "Step 1", "Step 2", ... ],
+  "image": "https://example.com/dish-image.jpg"
+}
+
+Respond only with valid JSON. Ensure the response is not cut off.
         `;
 
     try {
         const chatCompletion = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: prompt }],
-            max_tokens: 700,
+            max_tokens: 1000,
             temperature: 0.5,
         });
 
