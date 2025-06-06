@@ -16,7 +16,6 @@ Return the response as COMPLETE valid JSON. Do NOT cut off in the middle. Includ
 - A short introduction
 - List of ingredients with quantity
 - Step-by-step instructions
-- A publicly accessible image URL of the finished dish
 
 Ensure ingredients are locally available. Instructions should be beginner-friendly.
 
@@ -26,7 +25,6 @@ Wrap the response in JSON format as:
   "introduction": "...",
   "ingredients": [ { "item": "...", "quantity": "..." } ],
   "steps": [ "Step 1", "Step 2", ... ],
-  "image": "https://example.com/dish-image.jpg"
 }
 
 Respond only with valid JSON. Ensure the response is not cut off.
